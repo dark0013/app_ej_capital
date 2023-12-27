@@ -8,7 +8,8 @@
         </p>
         <div class="mb-3 has-validation">
             <label for="campo1" class="form-label">Ayúdanos con tus nombres y apellidos completos</label>
-            <input type="text" class="form-control"  [(ngModel)]="txtNombre" maxlength="200" placeholder="Escriba su nombre" >
+            <input type="text" class="form-control" [(ngModel)]="txtNombre" maxlength="200"
+                placeholder="Escriba su nombre">
 
         </div>
         <div class="mb-3">
@@ -30,21 +31,25 @@
         <div class="mb-3">
             <label for="campo2" class="form-label">Queremos mantenerte siempre informado, indícanos ¿cuál es tu
                 correo electrónico?</label>
-            <input type="text" class="form-control" required [(ngModel)]="txtemail" maxlength="200" placeholder="Escriba su email">
+            <input type="text" class="form-control" required [(ngModel)]="txtemail" maxlength="200"
+                placeholder="Escriba su email">
         </div>
         <div class="mb-3">
             <label for="campo2" class="form-label">Dirección de residencia?</label>
-            <input type="text" class="form-control" required [(ngModel)]="txtdomicilio" maxlength="200" placeholder="Escriba la direccion de su domicilio">
+            <input type="text" class="form-control" required [(ngModel)]="txtdomicilio" maxlength="200"
+                placeholder="Escriba la direccion de su domicilio">
         </div>
 
         <div class="mb-3">
             <label for="campo2" class="form-label">Ingresa tu contraseña</label>
-            <input type="password" class="form-control" required [(ngModel)]="txtcontrasenia" maxlength="80" placeholder="Agregar contraseña">
+            <input type="password" class="form-control" required [(ngModel)]="txtcontrasenia" maxlength="80"
+                placeholder="Agregar contraseña">
         </div>
 
         <div class="mb-3">
             <label for="campo2" class="form-label">Confirma tu contraseña</label>
-            <input type="password" class="form-control" required [(ngModel)]="txtconfiContrasenia" maxlength="80" placeholder="Confirmar contraseña">
+            <input type="password" class="form-control" required [(ngModel)]="txtconfiContrasenia" maxlength="80"
+                placeholder="Confirmar contraseña">
         </div>
 
         <hr class="custom-hr">
@@ -67,12 +72,52 @@
             <label class="custom-file-label" for="customFile">Selecciona un archivo</label>
         </div>
 
-        <input type="button" class="btn btn-info text-white" value="Enviar" (click)="guardarUsuario() ;">
+        <input type="button" [disabled]="isButtonDisabled" class="btn btn-info text-white" value="Enviar" (click)="guardarUsuario() ;">
 
     </div>
 
     <div class="derecha d-none d-md-block">
 
 
+    </div>
+</div>
+
+<!-- modal.component.html -->
+<div class="modal" id="myModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Advertencia</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>{{ MsjResponse }}</p>
+
+                <div class=" text-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        (click)=" closeModal();">Cerrar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModalOk" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Advertencia</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>{{ MsjResponse }}</p>
+
+                <div class=" text-center">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        (click)="Salir();">Aceptar</button>
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>

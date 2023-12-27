@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, Renderer2 } from '@angular/core';
 import { FileServicesService } from '../../services/utilidades/file-services.service';
 import { FormGroup, NgModel } from '@angular/forms';
 import { UsuariosService } from 'src/app/services/usuario/usuarios.service';
 import { Usuario } from 'src/app/model/usuario';
 import { Router } from '@angular/router';
 
+declare var $: any;
 
 @Component({
   selector: 'app-registrousuario',
@@ -22,17 +23,31 @@ export class RegistrousuarioComponent implements OnInit {
   txtdomicilio: string = '';
   txtcontrasenia: string = '';
   txtconfiContrasenia: string = '';
+  MsjResponse: string = '';
+  isButtonDisabled = false;
 
   usuario: Usuario[] = [];
 
 
   constructor(private fileService: FileServicesService,
     private usuarioService: UsuariosService,
-    private router: Router) { }
+    private router: Router, private el: ElementRef, private renderer: Renderer2) { }
 
   ngOnInit(): void {
 
 
+  }
+
+  openModal(EntradaModal: string): void {
+    const modal = this.el.nativeElement.querySelector(`#${EntradaModal}`);
+    this.renderer.addClass(modal, 'show');
+    this.renderer.setStyle(modal, 'display', 'block');
+  }
+
+  closeModal(): void {
+    const modal = this.el.nativeElement.querySelector('#myModal');
+    this.renderer.removeClass(modal, 'show');
+    this.renderer.setStyle(modal, 'display', 'none');
   }
 
   soloNumeros(evt) {
@@ -49,6 +64,7 @@ export class RegistrousuarioComponent implements OnInit {
   }
 
   guardarUsuario() {
+    this.isButtonDisabled = true;
     let usuario = new Usuario();
     usuario.nombres = this.txtNombre;
     usuario.cedula = this.txtcedula;
@@ -71,21 +87,28 @@ export class RegistrousuarioComponent implements OnInit {
     }
 
     if (contadorError > 0) {
-      alert(contadorError);
+      this.MsjResponse = 'LLenar todos los campos';
+      this.openModal("myModal");
+      this.isButtonDisabled = false;
     } else {
-      console.log(JSON.stringify(usuario));
+      this.usuarioService.saveUsuario(usuario).subscribe(
+        (response: any) => {
+          this.MsjResponse = 'Exito al Guardar Registro';
+          this.openModal("myModalOk");
+        },
+        (error: any) => {
+          this.MsjResponse = error;
+          this.openModal("myModal");
+        }
+      );
     }
 
     /* this.usuarioService.saveUsuario(usuario); */
-    /*   this.usuarioService.saveUsuario(usuario).subscribe(
-        (response: any) => {
-          alert('Exito al Guardar Registro');
-          this.router.navigate(['/']);
-        },
-        (error: any) => {
-          console.error('Error:', error);
-        }
-      ); */
+
+  }
+
+  Salir() {
+    this.router.navigate(['/']);
   }
 
   onFileIdentificacion(event: any) {
@@ -97,9 +120,6 @@ export class RegistrousuarioComponent implements OnInit {
 
       this.fileService.convertToBase64(file)
         .then(base64Data => {          // Aquí puedes hacer lo que desees con la representación base64
-          console.log('Archivo en base64:', base64Data);
-
-
           this.fileDataDocumento = base64Data;
         })
         .catch(error => {
@@ -117,10 +137,6 @@ export class RegistrousuarioComponent implements OnInit {
       // Utilizar el servicio para convertir a base64
       this.fileService.convertToBase64(file)
         .then(base64Data => {
-          // Aquí puedes hacer lo que desees con la representación base64
-          console.log('Archivo en base64:', base64Data);
-
-          // Guardar la representación base64 en la propiedad fileData
           this.fileDataSelfie = base64Data;
         })
         .catch(error => {
