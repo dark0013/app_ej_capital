@@ -1,0 +1,30 @@
+ /* Estilos para el contenedor principal */
+ .contenedor-azul {
+    background-color: #3C63CB;
+    padding: 0px 20px 0px;
+    margin-top: 0; 
+    height: 100vh;
+    
+  }
+
+  /* Estilos para el div interno */
+  .contenido-blanco {
+    background-color: white;
+    text-align: center;
+    padding: 0px 0px 0px 0px;
+    height: 100%;
+    font-size: 40pt;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  /* Estilos para el botón */
+  .boton-empezar {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #3C63CB;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+  }

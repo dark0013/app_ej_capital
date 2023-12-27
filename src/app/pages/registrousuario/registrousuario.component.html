@@ -1,0 +1,78 @@
+<div class="container-fluid formulario-container">
+    <div class="izquierda">
+        <!-- Contenido del lado izquierdo (80% del ancho) -->
+
+        <!-- Agrega aquí tus campos del formulario en el lado izquierdo -->
+        <p class="text-justify fs-2 fw-bold">
+            Bienvenido al formulario de registro de EJ Capital, estas a un paso de convertirte en un gran inversor
+        </p>
+        <div class="mb-3 has-validation">
+            <label for="campo1" class="form-label">Ayúdanos con tus nombres y apellidos completos</label>
+            <input type="text" class="form-control"  [(ngModel)]="txtNombre" maxlength="200" placeholder="Escriba su nombre" >
+
+        </div>
+        <div class="mb-3">
+            <label for="campo2" class="form-label">Ingresa tu numero de cédula</label>
+            <input type="text" class="form-control" required [(ngModel)]="txtcedula" (keypress)="soloNumeros($event)"
+                maxlength="10" placeholder="Digite su cedula">
+        </div>
+
+
+
+        <p class="text-justify fs-2 fw-bold">
+            Necesitamos que nos brinde información de contacto básica
+        </p>
+        <div class="mb-3">
+            <label for="campo1" class="form-label">¿Cuál es tu número celular de contacto?</label>
+            <input type="text" class="form-control" required [(ngModel)]="txtcelular" (keypress)="soloNumeros($event)"
+                maxlength="13" placeholder="Digite su número celular">
+        </div>
+        <div class="mb-3">
+            <label for="campo2" class="form-label">Queremos mantenerte siempre informado, indícanos ¿cuál es tu
+                correo electrónico?</label>
+            <input type="text" class="form-control" required [(ngModel)]="txtemail" maxlength="200" placeholder="Escriba su email">
+        </div>
+        <div class="mb-3">
+            <label for="campo2" class="form-label">Dirección de residencia?</label>
+            <input type="text" class="form-control" required [(ngModel)]="txtdomicilio" maxlength="200" placeholder="Escriba la direccion de su domicilio">
+        </div>
+
+        <div class="mb-3">
+            <label for="campo2" class="form-label">Ingresa tu contraseña</label>
+            <input type="password" class="form-control" required [(ngModel)]="txtcontrasenia" maxlength="80" placeholder="Agregar contraseña">
+        </div>
+
+        <div class="mb-3">
+            <label for="campo2" class="form-label">Confirma tu contraseña</label>
+            <input type="password" class="form-control" required [(ngModel)]="txtconfiContrasenia" maxlength="80" placeholder="Confirmar contraseña">
+        </div>
+
+        <hr class="custom-hr">
+
+        <h3>Estas a un paso para convertirte dueño de tu futuro</h3>
+
+        <div class="mb-3">
+            <p class="fw-bold">No dudamos que seas tú, sin embargo, por tu seguridad necitamos la foto de tu
+                documento de identidad
+                por ambos lados que refleje tu información</p>
+            <input type="file" class="custom-file-input" required (change)="onFileIdentificacion($event)"
+                accept=".png, .jpg, .jpeg, .gif">
+            <label class="custom-file-label" for="customFile">Selecciona un archivo</label>
+        </div>
+        <div class="mb-3">
+            <p class="fw-bold">Tomate una selfie en un lugar claro sosteniendo tu cedula, tal y como se refleja en
+                la imagen</p>
+            <input type="file" class="custom-file-input" required (change)="onFileSelfie($event)"
+                accept=".png, .jpg, .jpeg, .gif">
+            <label class="custom-file-label" for="customFile">Selecciona un archivo</label>
+        </div>
+
+        <input type="button" class="btn btn-info text-white" value="Enviar" (click)="guardarUsuario() ;">
+
+    </div>
+
+    <div class="derecha d-none d-md-block">
+
+
+    </div>
+</div>
