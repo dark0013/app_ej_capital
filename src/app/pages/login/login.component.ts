@@ -9,29 +9,51 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  txt_cedula = ''; // Obtén el usuario del formulario
+  txt_password = ''; // Obtén la contraseña del formulario
+
   constructor(private router: Router,
     private http: HttpClient,
     private authService: LoginService) { }
-
-
-  cedula = '0945501933'; // Obtén el usuario del formulario
-  password = '455016'; // Obtén la contraseña del formulario
 
   ngOnInit(): void {
 
   }
   avanzar() {
+    localStorage.setItem('TOKENS', '');
 
-    this.authService.validateSession(this.cedula, this.password).subscribe(response => {
-      console.log(response);
-      return response;
+    if(this.txt_cedula == "" || this.txt_cedula == null || this.txt_cedula == undefined){
+      alert("Llenar el campo de la cedula");
+      return
+    }
+    if(this.txt_password == "" || this.txt_password == null || this.txt_password == undefined){
+      alert("Llenar el campo de la contraseña");
+      return
+    }
+
+    this.authService.validateSession(this.txt_cedula, this.txt_password).subscribe(response => {
+
+      if (response.codResponse == "00") {
+        localStorage.setItem('TOKENS', response.token);
+        this.router.navigate(['/bienvenido'])
+      }
+      //  return response;
+    }, error => {
+      // Manejar errores aquí, por ejemplo: 401
+      console.log(error.status);
+      if (error.status === 401) {
+        alert("Error de autenticación");
+      } else {
+
+        alert("Ocurrio un error al momento de ingresar");
+      }
     });
     // this.router.navigate(['/dashboard'])
     // this.router.navigate(['/bienvenido'])
-    alert("Esta opción esta en desarrollo momentaneamente");
+    // alert("Esta opción esta en desarrollo momentaneamente");
   }
 
-  registrate(){
+  registrate() {
     this.router.navigate(['/registro'])
   }
 }

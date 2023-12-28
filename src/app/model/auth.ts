@@ -1,4 +1,4 @@
-export interface Auth{
+export interface AuthModel{
     usuario:string,
     contrasenia:string
 }

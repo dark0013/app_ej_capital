@@ -4,10 +4,12 @@
         <img src="assets/img/dashboard/Logo.png" class="img-fluid w-50 my-4">
         <form>
             <label for="usuario">Usuario</label>
-            <input type="text" id="usuario" name="usuario" placeholder="Documento de identidad" required>
+            <input type="text" id="usuario" [(ngModel)]="txt_cedula" name="usuario" placeholder="Documento de identidad"
+                required>
 
             <label for="contrasena">Contraseña</label>
-            <input type="password" id="contrasena" placeholder="Ingrese contraseña" name="contrasena" required>
+            <input type="password" id="contrasena" [(ngModel)]="txt_password" placeholder="Ingrese contraseña"
+                name="contrasena" required>
 
             <button type="button" class="btn_gnrl_uno" (click)="avanzar();">Iniciar sesión</button>
             <button type="button" class="btn_gnrl_dos" (click)="registrate();">Registrate</button>

@@ -1,28 +1,27 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Auth } from '../model/auth';
-import { environment } from '../../environments/environment';
-
+import { AuthModel } from '../model/auth';
+//import { environment } from '../../environments/environment';
+import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  auth: Auth;
-  url:string = `${environment.HOST}/login`;
+
+  url: string = `${environment.HOST}/login`;
   private isAuthenticated = false;
   private authToken: string | null = null;
 
   headers = new HttpHeaders({
     'Content-Type': 'application/json',
-    
+
     // Puedes agregar otras cabeceras según sea necesario
   });
 
   options = {
-    headers: this.headers,
-   // withCredentials: true, // Incluye esta línea si estás utilizando cookies y CORS lo permite
+    headers: this.headers
   };
 
   constructor(private http: HttpClient) { }

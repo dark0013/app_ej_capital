@@ -5,6 +5,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegistrousuarioComponent } from './pages/registrousuario/registrousuario.component';
 import { BienvenidosComponent } from './pages/bienvenidos/bienvenidos.component';
 
+//falta agregar la validación de los guardians y el por defecto
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
